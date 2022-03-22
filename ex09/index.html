@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Exemplo de Formulário</title>
+    <link
+      rel="icon"
+      href="https://lh3.googleusercontent.com/a-/AOh14GjzlrxLQp8GKFjtEe3cwpC-OcKSr6UqfukgQ7KS=s24-p-k-no-mo"
+    />
+    <style>
+      label {
+        color: brown;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Exemplo de Formulário</h1>
+    <form action="https://www.w3schools.com/action_page.php">
+      <fieldset>
+        <legend>Cadastro de produto</legend>
+        <label>Nome do produto:</label> <input type="text" name="nome" /><br />
+        Código de barras: <input type="text" name="codigo" /><br />
+        Preço: <input type="text" name="preco" /><br />
+        Seção:
+        <select name="secao" multiple>
+          <option value="hortifruti">Hortifrúti</option>
+          <option value="carnes">Carnes</option></select
+        ><br />
+        <input list="browsers" />
+        <datalist id="browsers">
+          <option value="Internet Explorer"></option>
+          <option value="Firefox"></option>
+          <option value="Chrome"></option>
+          <option value="Opera"></option>
+          <option value="Safari"></option>
+        </datalist>
+
+        <input type="submit" value="Cadastrar" />
+      </fieldset>
+    </form>
+  </body>
+</html>
