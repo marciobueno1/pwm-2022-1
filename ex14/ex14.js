@@ -38,22 +38,24 @@ function gerarListaFetch() {
 }
 
 const fetchPeople = () => {
-  console.log("ANTES");
   fetch("https://swapi.dev/api/people/")
-    .then((res) => {
-      console.log("res", res);
-      return res.json();
-    })
+    .then((res) => res.json())
     .then((data) => {
-      console.log("data", data);
       people = data.results;
       gerarListaFetch();
-    })
-    .catch((err) => {
-      console.log("err", err);
     });
-  console.log("DEPOIS");
+};
+
+const fetchPeople2 = async () => {
+  try {
+    const res = await fetch("https://swapi.dev/api/people/");
+    const data = await res.json();
+    people = data.results;
+    gerarListaFetch();
+  } catch (error) {
+    console.log("error", error);
+  }
 };
 
 gerarLista();
-fetchPeople();
+fetchPeople2();
