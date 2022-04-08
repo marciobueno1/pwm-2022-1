@@ -1,3 +1,5 @@
+let currentPage = "https://swapi.dev/api/people/";
+let nextPage = null;
 let people = [];
 const pessoas = [
   { nome: "Maria", idade: 18 },
@@ -8,6 +10,7 @@ const pessoas = [
 ];
 const listaFetch = document.getElementById("listaFetch");
 const lista = document.getElementById("lista");
+const btProxPag = document.getElementById("btProxPag");
 
 function gerarLista() {
   lista.innerHTML = "";
@@ -23,6 +26,7 @@ function gerarLista() {
 }
 
 function gerarListaFetch() {
+  btProxPag.disabled = nextPage == null;
   listaFetch.innerHTML = "";
   for (let i = 0; i < people.length; ++i) {
     // listaFetch.innerHTML += `<li>${i}</li>`;
@@ -37,6 +41,31 @@ function gerarListaFetch() {
   }
 }
 
+const fetchPeople = async () => {
+  try {
+    const res = await fetch(currentPage);
+    const data = await res.json();
+    people = data.results;
+    nextPage = data.next;
+    gerarListaFetch();
+  } catch (error) {
+    console.log("error", error);
+  }
+};
+
+const goToNextPage = () => {
+  currentPage = nextPage;
+  btProxPag.disabled = true;
+  fetchPeople();
+};
+
+btProxPag.onclick = goToNextPage;
+
+gerarLista();
+fetchPeople();
+
+/* 
+
 const fetchPeople = () => {
   fetch("https://swapi.dev/api/people/")
     .then((res) => res.json())
@@ -46,16 +75,5 @@ const fetchPeople = () => {
     });
 };
 
-const fetchPeople2 = async () => {
-  try {
-    const res = await fetch("https://swapi.dev/api/people/");
-    const data = await res.json();
-    people = data.results;
-    gerarListaFetch();
-  } catch (error) {
-    console.log("error", error);
-  }
-};
 
-gerarLista();
-fetchPeople2();
+*/
