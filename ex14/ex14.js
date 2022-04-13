@@ -1,5 +1,5 @@
-let currentPage = "https://swapi.dev/api/people/";
-let nextPage = null;
+let currentPage = localStorage.currentPage ?? "https://swapi.dev/api/people/";
+let nextPage = localStorage.nextPage ?? null;
 let people = [];
 const pessoas = [
   { nome: "Maria", idade: 18 },
@@ -47,6 +47,8 @@ const fetchPeople = async () => {
     const data = await res.json();
     people = data.results;
     nextPage = data.next;
+    localStorage.currentPage = currentPage;
+    localStorage.nextPage = nextPage;
     gerarListaFetch();
   } catch (error) {
     console.log("error", error);
